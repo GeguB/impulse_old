@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.boguszg.impulse">
+	<logger name="pl.boguszg.impulse">
 		<level value="info" />
 	</logger>
 	

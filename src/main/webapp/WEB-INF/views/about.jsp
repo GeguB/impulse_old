@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1>
-	Welcome!  
+	Hi there!  
 </h1>
 
-<P>  This web site was created by ${author}. </P>
+<P>  This web site was created by ${author}.</P>
 </body>
 </html>
