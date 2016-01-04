@@ -1,5 +1,9 @@
 package pl.boguszg.impulse;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -7,11 +11,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 /**
  * Handles requests for the application home page.
@@ -27,20 +31,33 @@ public class HomeController {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is welcome page!");
+		
+		DateFormat time = new SimpleDateFormat("HH:mm:ss");
+		DateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+		Date now = new Date();
+		
+		model.addObject("serverTime", time.format(now));
+		model.addObject("serverDate", date.format(now));
 		model.setViewName("hello");
+		
+		logger.info("Home page!");
+		
 		return model;
 
 	}
 	
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String about(Model model) {
-		logger.info("Good job on access!");
+	public ModelAndView about() {
+				
+		ModelAndView model = new ModelAndView();
 		
 		String name = "Grzegorz Bogusz";
-				
-		model.addAttribute("author", name);
+		model.addObject("author", name);
+		model.setViewName("about");
 		
-		return "about";
+		logger.info("Good job on access!");
+		
+		return model;
 	}
 	
 
@@ -52,6 +69,8 @@ public class HomeController {
 		model.addObject("message", "This is protected page!");
 		model.setViewName("admin");
 
+		logger.info("Accessed admin!");
+		
 		return model;
 
 	}
@@ -87,6 +106,7 @@ public class HomeController {
 	  if (!(auth instanceof AnonymousAuthenticationToken)) {
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();	
 		model.addObject("username", userDetail.getUsername());
+		
 	  }
 		
 	  model.setViewName("403");

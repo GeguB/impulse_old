@@ -6,9 +6,10 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	${title}  
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+<p> The time on the server is ${serverTime}. </p>
+<p> Today is ${serverDate}. </p>
 </body>
 </html>
