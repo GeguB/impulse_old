@@ -1,5 +1,4 @@
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <body>
@@ -25,8 +24,13 @@
 					href="javascript:formSubmit()"> Logout</a>
 			</h2>
 		</c:if>
-
-
 	</sec:authorize>
+	
+	
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		Ye'r an admin m8!
+	</sec:authorize>
+	
+	 
 </body>
 </html>

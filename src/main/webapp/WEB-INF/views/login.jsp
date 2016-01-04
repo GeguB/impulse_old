@@ -37,21 +37,23 @@
 	background-color: #d9edf7;
 	border-color: #bce8f1;
 }
+
+.title {
+	margin-top: 30px;
+	text-align: center;
+	font-size: 45px;
+}
 </style>
 
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-	<h1>
-		<center>Impulse - mobile network provider</center>
-	</h1>
-
+	<div class=title> Impulse - mobile network provider</div>
 	<div id="login-page">
 		<div class="container">
 			<form name='loginForm' class="form-login"
-				action="<c:url value='j_spring_security_check' />" method='POST'>
-				<h2 class="form-login-heading">Login with Phone number and
-					Password</h2>
+				action='j_spring_security_check' method='POST'>
+				<h2 class="form-login-heading">Login with Phone number and Password</h2>
 
 				<div class="login-wrap">
 					<c:if test="${not empty error}">
@@ -60,12 +62,11 @@
 					<c:if test="${not empty msg}">
 						<div class="msg">${msg}</div>
 					</c:if>
-					<input type="text" class="form-control" placeholder="User ID"
-						name='username' autofocus> <br> <input
-						type="password" class="form-control" placeholder="Password"
-						name='password'> <label class="checkbox"> <span
-						class="pull-right"> <a data-toggle="modal"
-							href="login.html#myModal"> Forgot Password?</a>
+					<input type="text" class="form-control" placeholder="User ID" name='username' autofocus> 
+					<br> 
+					<input type="password" class="form-control" placeholder="Password" name='password'> 
+					<label class="checkbox"> 
+					<span class="pull-right"> <a data-toggle="modal" href="login.html#myModal">Forgot Password?</a>
 					</span>
 					</label>
 					<button class="btn btn-theme btn-block" type="submit" name="submit"

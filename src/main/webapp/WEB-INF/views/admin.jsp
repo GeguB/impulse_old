@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@page session="true"%>
 <html>
 <body>
@@ -22,7 +23,11 @@
 
 	<c:if test="${pageContext.request.userPrincipal.name != null}">
 		<h2>
-			Welcome : ${pageContext.request.userPrincipal.name} | <a
+			Welcome : ${pageContext.request.userPrincipal.name} | a.k.a. 
+			<sec:authentication property="principal.username"/> 
+
+			<br />
+			<a
 				href="javascript:formSubmit()"> Logout</a>
 		</h2>
 	</c:if>
