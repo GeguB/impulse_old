@@ -3,6 +3,7 @@ package pl.boguszg.impulse;
 public class User {
 	
 	private int phone_number;
+	private int enabled;
 	private String username;
 	private String role;
 	
@@ -11,10 +12,8 @@ public class User {
 		
 	}
 	
-	public User(int phone_number, String username, String role) {
-		this.phone_number = phone_number;
+	public User(String username) {
 		this.username = username;
-		this.role = role;
 	}
 	public int getPhone_number() {
 		return phone_number;
@@ -22,6 +21,15 @@ public class User {
 	public void setPhone_number(int phone_number) {
 		this.phone_number = phone_number;
 	}
+	
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getUsername() {
 		return username;
 	}
