@@ -4,18 +4,27 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;  
+
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.config.authentication.UserServiceBeanDefinitionParser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import pl.boguszg.impulse.User;
+import pl.boguszg.impulse.services.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -117,4 +126,35 @@ public class HomeController {
 
 	}
 
+	
+	@Autowired
+	UserService userService;
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public ModelAndView register(@ModelAttribute User user) {
+
+		/*
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "Spring Security Custom Login Form");
+		model.addObject("message", "This is protected page!");
+		*/
+		/*
+		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("spring-database.xml");
+		UserDAO userDAO = (UserDAO) context.getBean("userDAO");
+		User user1 = new User("dupa");
+		
+		context.close();
+		*/
+		logger.info("New user created!");
+		
+		return new ModelAndView("register");
+
+	}
+	
+	@RequestMapping(value = "/create")
+	public String insertData(@ModelAttribute User user){
+		if (user != null)
+		userService.create(user);
+		return "redirect:/index";
+	}
 }
