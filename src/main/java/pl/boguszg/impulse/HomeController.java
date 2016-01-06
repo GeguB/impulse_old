@@ -3,6 +3,7 @@ package pl.boguszg.impulse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;  
 
 import org.springframework.beans.factory.annotation.Autowired;  
 
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.boguszg.impulse.User;
+import pl.boguszg.impulse.domain.User;
 import pl.boguszg.impulse.services.UserService;
 
 /**
@@ -34,6 +35,9 @@ import pl.boguszg.impulse.services.UserService;
 @Controller
 public class HomeController {
 
+	@Autowired
+	UserService userService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
@@ -127,34 +131,41 @@ public class HomeController {
 	}
 
 	
-	@Autowired
-	UserService userService;
-	
+/*
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(@ModelAttribute User user) {
 
-		/*
+		
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Spring Security Custom Login Form");
 		model.addObject("message", "This is protected page!");
-		*/
-		/*
+		
+		
 		ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("spring-database.xml");
 		UserDAO userDAO = (UserDAO) context.getBean("userDAO");
 		User user1 = new User("dupa");
 		
 		context.close();
-		*/
+	
 		logger.info("New user created!");
 		
 		return new ModelAndView("register");
 
 	}
-	
+*/
+/*
 	@RequestMapping(value = "/create")
 	public String insertData(@ModelAttribute User user){
 		if (user != null)
 		userService.create(user);
 		return "redirect:/index";
+	}
+*/
+	
+	@RequestMapping(value = "/getList")
+	public ModelAndView getUserList(){
+		List<User> userList = userService.getUserList();
+		logger.info("Get user list!");
+		return new ModelAndView("userList", "userList", userList);
 	}
 }

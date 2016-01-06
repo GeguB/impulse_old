@@ -1,6 +1,6 @@
 package pl.boguszg.impulse;
 
-import pl.boguszg.impulse.User;
+import pl.boguszg.impulse.domain.User;
 
 public class JDBCUserDAO {
 	
