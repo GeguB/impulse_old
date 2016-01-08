@@ -1,4 +1,4 @@
-package pl.boguszg.impulse.domain;
+package pl.boguszg.impulse.model;
 
 public class User {
 	

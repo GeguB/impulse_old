@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import pl.boguszg.impulse.domain.User;
+import pl.boguszg.impulse.model.User;
 import pl.boguszg.impulse.services.UserService;
 
 /**

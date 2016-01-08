@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
-import pl.boguszg.impulse.domain.User;
+import pl.boguszg.impulse.model.User;
 
 public class UserRowMapper implements RowMapper<User>{
 

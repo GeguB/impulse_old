@@ -5,7 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import pl.boguszg.impulse.domain.User;
+
+import pl.boguszg.impulse.model.User;
 
 public class UserExtractor implements ResultSetExtractor<User> {
 

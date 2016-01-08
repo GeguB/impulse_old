@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pl.boguszg.impulse.dao.UserDao;
-import pl.boguszg.impulse.domain.User;
+import pl.boguszg.impulse.model.User;
 
 public class UserServiceImpl implements UserService{
 	

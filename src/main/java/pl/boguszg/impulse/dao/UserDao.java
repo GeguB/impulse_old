@@ -1,7 +1,8 @@
 package pl.boguszg.impulse.dao;
 
 import java.util.List;
-import pl.boguszg.impulse.domain.User;
+
+import pl.boguszg.impulse.model.User;
 
 public interface UserDao {
 	
