@@ -164,8 +164,9 @@ public class HomeController {
 	
 	@RequestMapping(value = "/getList")
 	public ModelAndView getUserList(){
-		List<User> userList = userService.getUserList();
+		
+		//List<User> userList = userService.getUserList();
 		logger.info("Get user list!");
-		return new ModelAndView("userList", "userList", userList);
+		return new ModelAndView("userList");
 	}
 }

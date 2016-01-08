@@ -25,6 +25,7 @@ public class UserDaoImpl implements UserDao {
 
  }
 
+
  public List<User> getUserList() {
   List<User> userList = new ArrayList<User>();
 
@@ -35,7 +36,7 @@ public class UserDaoImpl implements UserDao {
   return userList;
  }
 
- 
+//@Override 
  public void deleteData(String id) {
   String sql = "delete from user where user_id=" + id;
   JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -43,7 +44,7 @@ public class UserDaoImpl implements UserDao {
 
  }
 
- 
+ //@Override 
  public void updateData(User user){
 	 
  }
@@ -62,7 +63,7 @@ public class UserDaoImpl implements UserDao {
  }
 */
  
- 
+ //@Override 
  public User getUser(String id) {
   List<User> userList = new ArrayList<User>();
   String sql = "select * from user where ID = " + id;
