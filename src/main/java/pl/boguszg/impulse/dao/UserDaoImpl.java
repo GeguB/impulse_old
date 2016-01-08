@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import pl.boguszg.impulse.model.User;
 
 
-
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
