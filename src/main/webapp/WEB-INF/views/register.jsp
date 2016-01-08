@@ -28,10 +28,6 @@ td {
 </style>
 </head>
 <body>
- <center>
-  
- 
- 
  <b>Being Java Guys | Registration Form </b> 
 
   
@@ -43,7 +39,7 @@ td {
       <td>First Name :</td>
       <td><form:input path="username" /></td>
      </tr>
-
+	<tr>
       <td> </td>
       <td><input type="submit" value="Save" /></td>
      </tr>
@@ -54,6 +50,5 @@ td {
     </table>
    </form:form>
   </div>
- </center>
 </body>
 </html>

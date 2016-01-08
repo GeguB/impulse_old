@@ -2,34 +2,53 @@ package pl.boguszg.impulse.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pl.boguszg.impulse.dao.UserDao;
 import pl.boguszg.impulse.model.User;
 
+@Service
 public class UserServiceImpl implements UserService{
+
+	private UserDao userDao;
 	
-	@Autowired
-	UserDao userDao;
-
-	public void insertData(User user) {
-		userDao.insertData(user);		
+	public void setUserDao(UserDao userDao){
+		this.userDao = userDao;				
+	}
+	
+	@Override
+	@Transactional
+	public void addUser(User u) {
+		this.userDao.updateUser(u);
+		
 	}
 
-	public List<User> getUserList() {
-		return userDao.getUserList();
+	@Override
+	@Transactional
+	public void updateUser(User u) {
+		this.userDao.addUser(u);
+		
 	}
 
-	public void updateData(User user) {
-		userDao.updateData(user);		
+	@Override
+	@Transactional
+	public List<User> listUser() {
+		return this.userDao.listUser();
 	}
 
-	public void deleteData(String id) {
-		userDao.deleteData(id);		
+	@Override
+	@Transactional
+	public User getUserById(int id) {
+		return this.userDao.getUserById(id);
 	}
 
-	public User getUser(String id) {
-		return userDao.getUser(id);
+	@Override
+	@Transactional
+	public void removeUser(int id) {
+		this.userDao.removeUser(id);
 	}
+	
+
 
 }

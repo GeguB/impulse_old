@@ -5,73 +5,69 @@ import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
-import pl.boguszg.impulse.jdbc.UserRowMapper;
 import pl.boguszg.impulse.model.User;
+
+
 
 public class UserDaoImpl implements UserDao {
 
- @Autowired
- DataSource dataSource;
+	private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
- public void insertData(User user) {
+	private SessionFactory sessionFactory;
+    
+    public void setSessionFactory(SessionFactory sf){
+        this.sessionFactory = sf;
+    }
+    
+    @Override
+	public void addUser(User u) {
+    	Session session = this.sessionFactory.getCurrentSession();
+        session.persist(u);
+        logger.info("User saved successfully, User Details="+u);
+	}
+    
+    @Override
+	public void updateUser(User u) {
+    	Session session = this.sessionFactory.getCurrentSession();
+    	session.update(u);
+    	logger.info("User updated successfully, User Details="+u);
+	}
+	
+	@SuppressWarnings("unchecked")
+    @Override
+	public List<User> listUser() {
+		Session session = this.sessionFactory.getCurrentSession();
+        List<User> personsList = session.createQuery("from Users").list();
+        for(User u : personsList){
+            logger.info("Users List::"+u);
+        }
+        return personsList;
+	}
 
-  String sql = "INSERT INTO user "
-    + "(username, email, roles_role, password) VALUES (?, ?, ?, ?)";
+	@Override
+	public User getUserById(int id) {
+		Session session = this.sessionFactory.getCurrentSession();      
+        User u = (User) session.load(User.class, new Integer(id));
+        logger.info("User loaded successfully, User details="+u);
+        return u;
+	}
 
-  JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+	@Override
+	public void removeUser(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+        User u = (User) session.load(User.class, new Integer(id));
+        if(null != u){
+            session.delete(u);
+        }
+        logger.info("User deleted successfully, user details="+u);		
+	}
 
-  jdbcTemplate.update(sql,
-    new Object[] { user.getUsername(), user.getEmail(), user.getRole(), user.getPassword() });
-
- }
-
-
- public List<User> getUserList() {
-  List<User> userList = new ArrayList<User>();
-
-  String sql = "select * from users";
-
-  JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-  userList = jdbcTemplate.query(sql, new UserRowMapper());
-  return userList;
- }
-
-//@Override 
- public void deleteData(String id) {
-  String sql = "delete from user where user_id=" + id;
-  JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-  jdbcTemplate.update(sql);
-
- }
-
- //@Override 
- public void updateData(User user){
-	 
- }
- /*
- @Override
- public void updateData(User user) {
-
-  String sql = "UPDATE user set username = ?, email = ?,  = ?, city = ? where user_id = ?";
-  JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-  jdbcTemplate.update(
-    sql,
-    new Object[] { user.getUsername(), user.getLastName(),
-      user.getGender(), user.getCity(), user.getUserId() });
-
- }
-*/
- 
- //@Override 
- public User getUser(String id) {
-  List<User> userList = new ArrayList<User>();
-  String sql = "select * from user where ID = " + id;
-  JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-  userList = jdbcTemplate.query(sql, new UserRowMapper());
-  return userList.get(0);
- }
 
 }
 
