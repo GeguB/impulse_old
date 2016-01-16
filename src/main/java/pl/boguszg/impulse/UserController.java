@@ -2,7 +2,6 @@ package pl.boguszg.impulse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,11 +17,13 @@ public class UserController {
 
 	private UserService userService;
 	
+	@Autowired
+	@Qualifier("userService")
 	public void setUserService(UserService us){
 		this.userService = us;
 	}
 	
-	@RequestMapping(value="/users", method = RequestMethod.POST)
+	@RequestMapping(value="/users", method = RequestMethod.GET)
 	public String addUser(@ModelAttribute("user") User u){
 		
 		if(u.getId() == 0){
